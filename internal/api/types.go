@@ -641,30 +641,148 @@ type ImageBlock struct {
 // DividerBlock represents a divider (horizontal rule) in a document
 type DividerBlock struct{}
 
+// TableProperty represents properties of a table block
+type TableProperty struct {
+	RowSize      int   `json:"row_size"`
+	ColumnSize   int   `json:"column_size"`
+	ColumnWidth  []int `json:"column_width,omitempty"`
+	HeaderRow    bool  `json:"header_row,omitempty"`
+	HeaderColumn bool  `json:"header_column,omitempty"`
+}
+
+// TableBlock represents a table in a document
+type TableBlock struct {
+	Cells    []string       `json:"cells,omitempty"`
+	Property *TableProperty `json:"property"`
+}
+
+// TableCellBlock represents a table cell in a document
+type TableCellBlock struct{}
+
+// BitableBlock represents a Bitable embed block
+type BitableBlock struct {
+	Token    string `json:"token,omitempty"`
+	ViewType int    `json:"view_type,omitempty"`
+}
+
+// CalloutBlock represents a callout block
+type CalloutBlock struct {
+	BackgroundColor int    `json:"background_color,omitempty"`
+	BorderColor     int    `json:"border_color,omitempty"`
+	TextColor       int    `json:"text_color,omitempty"`
+	EmojiID         string `json:"emoji_id,omitempty"`
+}
+
+// ChatCardBlock represents a chat card block
+type ChatCardBlock struct {
+	ChatID string `json:"chat_id,omitempty"`
+	Align  int    `json:"align,omitempty"`
+}
+
+// DiagramBlock represents a UML diagram block
+type DiagramBlock struct {
+	DiagramType int `json:"diagram_type,omitempty"`
+}
+
+// FileBlock represents a file attachment block
+type FileBlock struct {
+	Token    string `json:"token,omitempty"`
+	Name     string `json:"name,omitempty"`
+	ViewType int    `json:"view_type,omitempty"`
+}
+
+// GridBlock represents a grid layout block
+type GridBlock struct {
+	ColumnSize int `json:"column_size,omitempty"`
+}
+
+// GridColumnBlock represents a grid column block
+type GridColumnBlock struct {
+	WidthRatio int `json:"width_ratio,omitempty"`
+}
+
+// IframeComponent represents the component inside an iframe block
+type IframeComponent struct {
+	Type int    `json:"type,omitempty"`
+	URL  string `json:"url,omitempty"`
+}
+
+// IframeBlock represents an iframe embed block
+type IframeBlock struct {
+	Component *IframeComponent `json:"component,omitempty"`
+}
+
+// ISVBlock represents an ISV (team interaction app) block
+type ISVBlock struct {
+	ComponentID     string `json:"component_id,omitempty"`
+	ComponentTypeID string `json:"component_type_id,omitempty"`
+}
+
+// MindnoteBlock represents a mindnote/thought notes block
+type MindnoteBlock struct {
+	Token string `json:"token,omitempty"`
+}
+
+// SheetBlock represents an embedded spreadsheet block
+type SheetBlock struct {
+	Token      string `json:"token,omitempty"`
+	RowSize    int    `json:"row_size,omitempty"`
+	ColumnSize int    `json:"column_size,omitempty"`
+}
+
+// ViewBlock represents a view block (card/preview/inline)
+type ViewBlock struct {
+	ViewType int `json:"view_type,omitempty"`
+}
+
+// QuoteContainerBlock represents a quote container block
+type QuoteContainerBlock struct{}
+
+// TaskBlock represents a task block
+type TaskBlock struct {
+	TaskID string `json:"task_id,omitempty"`
+}
+
 // DocumentBlock represents a block in a document
 type DocumentBlock struct {
-	BlockID   string      `json:"block_id,omitempty"`
-	ParentID  string      `json:"parent_id,omitempty"`
-	Children  []string    `json:"children,omitempty"`
-	BlockType int         `json:"block_type"`
-	Page      *TextBlock  `json:"page,omitempty"`
-	Text      *TextBlock  `json:"text,omitempty"`
-	Heading1  *TextBlock  `json:"heading1,omitempty"`
-	Heading2  *TextBlock  `json:"heading2,omitempty"`
-	Heading3  *TextBlock  `json:"heading3,omitempty"`
-	Heading4  *TextBlock  `json:"heading4,omitempty"`
-	Heading5  *TextBlock  `json:"heading5,omitempty"`
-	Heading6  *TextBlock  `json:"heading6,omitempty"`
-	Heading7  *TextBlock  `json:"heading7,omitempty"`
-	Heading8  *TextBlock  `json:"heading8,omitempty"`
-	Heading9  *TextBlock  `json:"heading9,omitempty"`
-	Bullet    *TextBlock  `json:"bullet,omitempty"`
-	Ordered   *TextBlock  `json:"ordered,omitempty"`
-	Code      *TextBlock  `json:"code,omitempty"`
-	Quote     *TextBlock  `json:"quote,omitempty"`
-	TodoBlock *TextBlock  `json:"todo,omitempty"`
-	Divider   *DividerBlock `json:"divider,omitempty"`
-	Image     *ImageBlock `json:"image,omitempty"`
+	BlockID        string               `json:"block_id,omitempty"`
+	ParentID       string               `json:"parent_id,omitempty"`
+	Children       []string             `json:"children,omitempty"`
+	BlockType      int                  `json:"block_type"`
+	Page           *TextBlock           `json:"page,omitempty"`
+	Text           *TextBlock           `json:"text,omitempty"`
+	Heading1       *TextBlock           `json:"heading1,omitempty"`
+	Heading2       *TextBlock           `json:"heading2,omitempty"`
+	Heading3       *TextBlock           `json:"heading3,omitempty"`
+	Heading4       *TextBlock           `json:"heading4,omitempty"`
+	Heading5       *TextBlock           `json:"heading5,omitempty"`
+	Heading6       *TextBlock           `json:"heading6,omitempty"`
+	Heading7       *TextBlock           `json:"heading7,omitempty"`
+	Heading8       *TextBlock           `json:"heading8,omitempty"`
+	Heading9       *TextBlock           `json:"heading9,omitempty"`
+	Bullet         *TextBlock           `json:"bullet,omitempty"`
+	Ordered        *TextBlock           `json:"ordered,omitempty"`
+	Code           *TextBlock           `json:"code,omitempty"`
+	Quote          *TextBlock           `json:"quote,omitempty"`
+	TodoBlock      *TextBlock           `json:"todo,omitempty"`
+	Bitable        *BitableBlock        `json:"bitable,omitempty"`
+	Callout        *CalloutBlock        `json:"callout,omitempty"`
+	ChatCard       *ChatCardBlock       `json:"chat_card,omitempty"`
+	Diagram        *DiagramBlock        `json:"diagram,omitempty"`
+	Divider        *DividerBlock        `json:"divider,omitempty"`
+	File           *FileBlock           `json:"file,omitempty"`
+	Grid           *GridBlock           `json:"grid,omitempty"`
+	GridColumn     *GridColumnBlock     `json:"grid_column,omitempty"`
+	Iframe         *IframeBlock         `json:"iframe,omitempty"`
+	Image          *ImageBlock          `json:"image,omitempty"`
+	ISV            *ISVBlock            `json:"isv,omitempty"`
+	Mindnote       *MindnoteBlock       `json:"mindnote,omitempty"`
+	Sheet          *SheetBlock          `json:"sheet,omitempty"`
+	Table          *TableBlock          `json:"table,omitempty"`
+	TableCell      *TableCellBlock      `json:"table_cell,omitempty"`
+	View           *ViewBlock           `json:"view,omitempty"`
+	QuoteContainer *QuoteContainerBlock `json:"quote_container,omitempty"`
+	Task           *TaskBlock           `json:"task,omitempty"`
 }
 
 // --- Document API Response Types ---
@@ -717,6 +835,32 @@ type CreateBlockChildrenResponse struct {
 		DocumentRevisionID int             `json:"document_revision_id,omitempty"`
 		ClientToken        string          `json:"client_token,omitempty"`
 	} `json:"data,omitempty"`
+}
+
+// UpdateTextElements is the body for updating text elements of a block
+type UpdateTextElements struct {
+	Elements []TextElement `json:"elements"`
+}
+
+// UpdateBlockRequest is the request body for PATCH /docx/v1/documents/:document_id/blocks/:block_id
+type UpdateBlockRequest struct {
+	UpdateTextElements *UpdateTextElements `json:"update_text_elements,omitempty"`
+}
+
+// UpdateBlockResponse is the response from updating a block
+type UpdateBlockResponse struct {
+	BaseResponse
+	Data struct {
+		Block              *DocumentBlock `json:"block,omitempty"`
+		DocumentRevisionID int            `json:"document_revision_id,omitempty"`
+	} `json:"data,omitempty"`
+}
+
+// OutputDocumentUpdateBlock is the update block response for CLI
+type OutputDocumentUpdateBlock struct {
+	Success            bool           `json:"success"`
+	DocumentRevisionID int            `json:"document_revision_id"`
+	Block              *DocumentBlock `json:"block,omitempty"`
 }
 
 // OutputDocumentCreate is the create document response for CLI
