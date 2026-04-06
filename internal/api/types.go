@@ -537,13 +537,16 @@ type SearchUsersResponse struct {
 
 // OutputContact is the simplified contact format for CLI output
 type OutputContact struct {
-	UserID     string `json:"user_id"`
-	OpenID     string `json:"open_id,omitempty"`
-	Name       string `json:"name"`
-	EnName     string `json:"en_name,omitempty"`
-	Email      string `json:"email,omitempty"`
-	JobTitle   string `json:"job_title,omitempty"`
-	Department string `json:"department,omitempty"` // Primary department name
+	UserID      string `json:"user_id"`
+	OpenID      string `json:"open_id,omitempty"`
+	Name        string `json:"name"`
+	EnName      string `json:"en_name,omitempty"`
+	Email       string `json:"email,omitempty"`
+	JobTitle    string `json:"job_title,omitempty"`
+	Department  string `json:"department,omitempty"`  // Primary department name
+	City        string `json:"city,omitempty"`         // Work city
+	Country     string `json:"country,omitempty"`      // Country or region code
+	WorkStation string `json:"work_station,omitempty"` // Seat/work station
 }
 
 // OutputContactList is the list contacts response for CLI

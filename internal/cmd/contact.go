@@ -53,13 +53,16 @@ Examples:
 		}
 
 		result := api.OutputContact{
-			UserID:     user.OpenID,
-			OpenID:     user.OpenID,
-			Name:       user.Name,
-			EnName:     user.EnName,
-			Email:      user.Email,
-			JobTitle:   user.JobTitle,
-			Department: deptName,
+			UserID:      user.OpenID,
+			OpenID:      user.OpenID,
+			Name:        user.Name,
+			EnName:      user.EnName,
+			Email:       user.Email,
+			JobTitle:    user.JobTitle,
+			Department:  deptName,
+			City:        user.City,
+			Country:     user.Country,
+			WorkStation: user.WorkStation,
 		}
 
 		output.JSON(result)
@@ -118,13 +121,16 @@ Examples:
 		contacts := make([]api.OutputContact, len(allUsers))
 		for i, u := range allUsers {
 			contacts[i] = api.OutputContact{
-				UserID:     u.OpenID,
-				OpenID:     u.OpenID,
-				Name:       u.Name,
-				EnName:     u.EnName,
-				Email:      u.Email,
-				JobTitle:   u.JobTitle,
-				Department: deptName,
+				UserID:      u.OpenID,
+				OpenID:      u.OpenID,
+				Name:        u.Name,
+				EnName:      u.EnName,
+				Email:       u.Email,
+				JobTitle:    u.JobTitle,
+				Department:  deptName,
+				City:        u.City,
+				Country:     u.Country,
+				WorkStation: u.WorkStation,
 			}
 		}
 
